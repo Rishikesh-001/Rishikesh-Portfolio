@@ -33,6 +33,16 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-black selection:text-white relative">
 
+    <div id="pageLoader" role="status" aria-live="polite" aria-label="Loading portfolio">
+        <div class="loader-mark">
+            <img src="Portfolio star image.avif" alt="" class="loader-star">
+            <span class="loader-name">RISHIKESH</span>
+            <img src="Portfolio Thunder image.avif" alt="" class="loader-thunder">
+        </div>
+        <div class="loader-track"><span></span></div>
+        <p class="loader-status">Loading portfolio</p>
+    </div>
+
     <canvas id="cursorEffects" aria-hidden="true"></canvas>
     <span id="customCursor" aria-hidden="true"></span>
     <span id="cursorLabel" aria-hidden="true"></span>
@@ -41,7 +51,7 @@
     <header class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
         <div class="bg-black text-white px-6 py-2.5 rounded-full shadow-2xl flex items-center justify-between gap-12 border border-zinc-800">
             <a href="#hero" class="font-semibold text-sm tracking-wide hover:opacity-80 transition">Rishikesh</a>
-            <button id="menuToggle" aria-label="Toggle menu" class="bg-zinc-800 hover:bg-zinc-700 text-white rounded-full p-1.5 transition flex items-center justify-center">
+            <button id="menuToggle" aria-label="Toggle menu" aria-expanded="false" class="bg-zinc-800 hover:bg-zinc-700 text-white rounded-full p-1.5 transition flex items-center justify-center">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <circle cx="5" cy="12" r="2" />
                     <circle cx="12" cy="12" r="2" />
@@ -51,14 +61,14 @@
         </div>
 
         <!-- POPUP MENU MODAL -->
-        <div id="navMenu" class="hidden absolute top-14 left-1/2 -translate-x-1/2 w-64 bg-black/95 text-white backdrop-blur-md rounded-2xl p-4 border border-zinc-800 shadow-2xl transition-all duration-300">
+        <div id="navMenu" class="hidden absolute top-14 left-1/2 -translate-x-1/2 w-64 bg-black/95 text-white backdrop-blur-md rounded-2xl p-4 border border-zinc-800 shadow-2xl transition-all duration-300" aria-hidden="true">
             <nav class="flex flex-col gap-2 text-sm text-center">
-                <a href="#about" class="py-2 hover:bg-zinc-800 rounded-lg transition">About Me</a>
-                <a href="#services" class="py-2 hover:bg-zinc-800 rounded-lg transition">Services</a>
-                <a href="#projects" class="py-2 hover:bg-zinc-800 rounded-lg transition">Featured Projects</a>
-                <a href="#testimonials" class="py-2 hover:bg-zinc-800 rounded-lg transition">Testimonials</a>
-                <a href="#thoughts" class="py-2 hover:bg-zinc-800 rounded-lg transition">Thoughts</a>
-                <a href="#contact" class="py-2 bg-white text-black font-semibold rounded-lg hover:bg-zinc-200 transition">Let's Talk</a>
+                <a href="#about" class="nav-link py-2 hover:bg-zinc-800 rounded-lg transition">About Me</a>
+                <a href="#services" class="nav-link py-2 hover:bg-zinc-800 rounded-lg transition">Services</a>
+                <a href="#projects" class="nav-link py-2 hover:bg-zinc-800 rounded-lg transition">Featured Projects</a>
+                <a href="#testimonials" class="nav-link py-2 hover:bg-zinc-800 rounded-lg transition">Testimonials</a>
+                <a href="#thoughts" class="nav-link py-2 hover:bg-zinc-800 rounded-lg transition">Thoughts</a>
+                <a href="#contact" class="nav-link py-2 bg-white text-black font-semibold rounded-lg hover:bg-zinc-200 transition">Let's Talk</a>
             </nav>
         </div>
     </header>
@@ -70,14 +80,10 @@
         <section id="hero" class="relative flex flex-col items-center justify-center pt-8 text-center min-h-[85vh]">
             <!-- Floating Decorative Icons -->
             <div class="absolute top-4 left-6 sm:left-20 animate-bounce duration-1000 opacity-80 pointer-events-none">
-                <svg class="w-12 h-12 text-zinc-800 fill-current" viewBox="0 0 24 24">
-                    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
-                </svg>
+                <img src="Portfolio star image.avif" alt="" class="w-20 h-20 object-contain">
             </div>
-            <div class="absolute bottom-20 right-6 sm:right-20 animate-pulse duration-700 opacity-80 pointer-events-none">
-                <svg class="w-10 h-10 text-zinc-800 fill-current" viewBox="0 0 24 24">
-                    <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
-                </svg>
+            <div class="absolute top-1/2 right-6 sm:right-20 -translate-y-1/2 animate-pulse duration-700 opacity-80 pointer-events-none">
+                <img src="Portfolio Thunder image.avif" alt="" class="w-16 h-16 object-contain">
             </div>
 
             <!-- Big Typography -->
@@ -91,7 +97,7 @@
                     <div class="photo-flight-placeholder w-48 h-56 sm:w-56 sm:h-64"></div>
                     <div class="photo-flight-card w-48 h-56 sm:w-56 sm:h-64 rounded-3xl shadow-2xl border-4 border-white" data-face="first" aria-hidden="true">
                         <img src="Rissss.jpeg" alt="" class="photo-flight-face photo-flight-front w-full h-full object-cover filter grayscale contrast-125">
-                        <img src="Rishikesh Profile.png" alt="" class="photo-flight-face photo-flight-back w-full h-full object-cover filter contrast-125">
+                        <img src="Rissss.jpeg" alt="" class="photo-flight-face photo-flight-back w-full h-full object-cover filter contrast-125">
                     </div>
                     <span class="mt-3 block text-[10px] uppercase tracking-widest text-zinc-500">Scroll to move the portrait</span>
                 </div>
@@ -146,24 +152,28 @@
             <h2 class="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900">Services</h2>
 
             <div class="divide-y divide-zinc-300 border-t border-b border-zinc-300">
-                <div class="py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl">
+                <div class="service-item py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl" tabindex="0" data-cursor-label="Preview service">
                     <h3 class="text-xl sm:text-2xl font-bold text-zinc-900">Cybersecurity & Auditing</h3>
                     <p class="text-xs sm:text-sm text-zinc-500 font-medium">URL Attack Detection • Smart Contract Auditing • Network Security</p>
+                    <div class="service-preview" aria-hidden="true"><span>Image coming soon</span></div>
                 </div>
 
-                <div class="py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl">
+                <div class="service-item py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl" tabindex="0" data-cursor-label="Preview service">
                     <h3 class="text-xl sm:text-2xl font-bold text-zinc-900">AI Agent Workflows</h3>
                     <p class="text-xs sm:text-sm text-zinc-500 font-medium">n8n Automation • LLM Integrations • Process Optimization</p>
+                    <div class="service-preview" aria-hidden="true"><span>Image coming soon</span></div>
                 </div>
 
-                <div class="py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl">
+                <div class="service-item py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl" tabindex="0" data-cursor-label="Preview service">
                     <h3 class="text-xl sm:text-2xl font-bold text-zinc-900">Frontend Development</h3>
                     <p class="text-xs sm:text-sm text-zinc-500 font-medium">UI Dev • Responsive Layouts • Web Performance • Tailwind</p>
+                    <div class="service-preview" aria-hidden="true"><span>Image coming soon</span></div>
                 </div>
 
-                <div class="py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl">
+                <div class="service-item py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl" tabindex="0" data-cursor-label="Preview service">
                     <h3 class="text-xl sm:text-2xl font-bold text-zinc-900">Product Consulting</h3>
                     <p class="text-xs sm:text-sm text-zinc-500 font-medium">Product Direction • Web Strategy • Technical Architecture</p>
+                    <div class="service-preview" aria-hidden="true"><span>Image coming soon</span></div>
                 </div>
             </div>
         </section>
@@ -393,6 +403,7 @@
                 <h2 class="text-[18vw] sm:text-[16vw] font-extrabold tracking-tighter text-zinc-900 leading-none select-none pointer-events-none">
                     RISHIKESH
                 </h2>
+                <p class="mt-6 text-[10px] font-medium tracking-widest uppercase text-zinc-500">© 2026 Rishikesh Raj. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -400,6 +411,13 @@
 
     <!-- INTERACTIVE JAVASCRIPT -->
     <script>
+        // Fade the branded loading screen after the page and local assets are ready.
+        const pageLoader = document.getElementById('pageLoader');
+        window.addEventListener('load', () => {
+            pageLoader.classList.add('is-loaded');
+            window.setTimeout(() => pageLoader.remove(), 700);
+        });
+
         // Layer a restrained black-and-grey cursor system over the portfolio.
         const cursorCanvas = document.getElementById('cursorEffects');
         const cursorContext = cursorCanvas.getContext('2d');
@@ -491,6 +509,20 @@
             });
         });
 
+        // Let each service preview follow the pointer inside its row.
+        document.querySelectorAll('.service-item').forEach((service) => {
+            service.addEventListener('pointermove', (event) => {
+                if (!cursorFinePointer) return;
+                const bounds = service.getBoundingClientRect();
+                const previewWidth = Math.min(190, bounds.width - 32);
+                const previewHeight = 130;
+                const left = Math.min(Math.max(event.clientX - bounds.left + 18, previewWidth / 2 + 8), bounds.width - previewWidth / 2 - 8);
+                const top = Math.min(Math.max(event.clientY - bounds.top, previewHeight / 2 + 8), bounds.height - previewHeight / 2 - 8);
+                service.style.setProperty('--preview-left', `${left}px`);
+                service.style.setProperty('--preview-top', `${top}px`);
+            });
+        });
+
         document.querySelectorAll('#menuToggle, #projects a, #contact button, footer a').forEach((control) => {
             control.dataset.cursorLabel = control.dataset.cursorLabel || 'Open';
             control.classList.add('magnetic-control');
@@ -506,20 +538,109 @@
             });
         });
 
+        // Type each section heading once when it enters the viewport.
+        const typingHeadings = document.querySelectorAll('h2');
+        typingHeadings.forEach((heading) => {
+            heading.dataset.typingText = heading.textContent.trim();
+            heading.classList.add('typing-heading');
+        });
+
+        const headingObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting || entry.target.dataset.typed === 'true') return;
+
+                const heading = entry.target;
+                const text = heading.dataset.typingText;
+                let characterIndex = 0;
+                heading.dataset.typed = 'true';
+                heading.classList.add('is-typing');
+                heading.textContent = '';
+
+                const typeCharacter = () => {
+                    heading.textContent = text.slice(0, characterIndex);
+                    characterIndex += 1;
+                    if (characterIndex <= text.length) {
+                        window.setTimeout(typeCharacter, 55);
+                    } else {
+                        heading.classList.remove('is-typing');
+                    }
+                };
+
+                typeCharacter();
+                observer.unobserve(heading);
+            });
+        }, { threshold: 0.35 });
+
+        typingHeadings.forEach((heading) => headingObserver.observe(heading));
+
         // Toggle mobile popup navigation menu
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.getElementById('navMenu');
+        const navLinks = [...document.querySelectorAll('#navMenu .nav-link')];
+        const navSections = [...document.querySelectorAll('main section[id]')];
 
         menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('hidden');
+            const isOpen = navMenu.classList.toggle('nav-open');
+            navMenu.classList.toggle('hidden', !isOpen);
+            navMenu.setAttribute('aria-hidden', String(!isOpen));
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
         });
 
         // Close menu when clicking links
-        document.querySelectorAll('#navMenu a').forEach(link => {
+        navLinks.forEach(link => {
             link.addEventListener('click', () => {
+                navMenu.classList.remove('nav-open');
                 navMenu.classList.add('hidden');
+                navMenu.setAttribute('aria-hidden', 'true');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+            link.addEventListener('pointermove', (event) => {
+                const bounds = link.getBoundingClientRect();
+                const offset = (event.clientX - (bounds.left + bounds.width / 2)) * 0.08;
+                link.style.transform = `translateX(${offset}px)`;
+            });
+            link.addEventListener('pointerleave', () => {
+                link.style.transform = '';
             });
         });
+
+        document.addEventListener('pointerdown', (event) => {
+            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                navMenu.classList.remove('nav-open');
+                navMenu.classList.add('hidden');
+                navMenu.setAttribute('aria-hidden', 'true');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                navMenu.classList.remove('nav-open');
+                navMenu.classList.add('hidden');
+                navMenu.setAttribute('aria-hidden', 'true');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.focus();
+            }
+        });
+
+        function setActiveNavSection(sectionId) {
+            navLinks.forEach((link) => {
+                const isActive = link.getAttribute('href') === `#${sectionId}`;
+                link.classList.toggle('is-active', isActive);
+                if (isActive) link.setAttribute('aria-current', 'page');
+                else link.removeAttribute('aria-current');
+            });
+        }
+
+        const activeSectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                setActiveNavSection(entry.target.id);
+            });
+        }, { rootMargin: '-35% 0px -55% 0px' });
+
+        navSections.forEach((section) => activeSectionObserver.observe(section));
+        setActiveNavSection(window.location.hash.slice(1) || 'hero');
+        window.addEventListener('load', () => setActiveNavSection(window.location.hash.slice(1) || 'hero'));
 
         // Move the first portrait through the page and into the second portrait's position.
         const flightSource = document.querySelector('.photo-flight-source');
