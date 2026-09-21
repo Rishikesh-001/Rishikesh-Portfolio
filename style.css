@@ -1,0 +1,58 @@
+
+        body {
+            background-color: #F4F3EF;
+            color: #0d0d0d;
+            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(#d1cfc7 0.75px, transparent 0.75px);
+            background-size: 24px 24px;
+        }
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+        }
+        .bg-textured {
+            background-color: #F4F3EF;
+        }
+        /* Hide scrollbars for clean UI */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .photo-flight-source {
+            position: relative;
+        }
+        .photo-flight-placeholder {
+            visibility: hidden;
+        }
+        .photo-flight-card {
+            position: fixed;
+            z-index: 40;
+            transform-style: preserve-3d;
+            transform-origin: top left;
+            overflow: hidden;
+            pointer-events: none;
+            will-change: left, top, transform;
+            backface-visibility: visible;
+        }
+        .photo-flight-card img {
+            display: block;
+        }
+        .photo-flight-target {
+            isolation: isolate;
+        }
+        .photo-flight-arrival {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 150ms ease;
+        }
+        .photo-flight-second {
+            transition: opacity 150ms ease;
+        }
+  

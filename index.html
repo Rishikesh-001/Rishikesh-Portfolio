@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishikesh Raj — Software Engineer & Cybersecurity</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F4F3EF',
+                        darkCard: '#121212',
+                        darkHover: '#1e1e1e',
+                        borderMuted: '#e2e0d8',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700;800;900&display=swap" rel="stylesheet">
+    
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-black selection:text-white relative">
+
+    <!-- TOP NAVIGATION PILL -->
+    <header class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
+        <div class="bg-black text-white px-6 py-2.5 rounded-full shadow-2xl flex items-center justify-between gap-12 border border-zinc-800">
+            <a href="#hero" class="font-semibold text-sm tracking-wide hover:opacity-80 transition">Rishikesh</a>
+            <button id="menuToggle" aria-label="Toggle menu" class="bg-zinc-800 hover:bg-zinc-700 text-white rounded-full p-1.5 transition flex items-center justify-center">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <circle cx="5" cy="12" r="2" />
+                    <circle cx="12" cy="12" r="2" />
+                    <circle cx="19" cy="12" r="2" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- POPUP MENU MODAL -->
+        <div id="navMenu" class="hidden absolute top-14 left-1/2 -translate-x-1/2 w-64 bg-black/95 text-white backdrop-blur-md rounded-2xl p-4 border border-zinc-800 shadow-2xl transition-all duration-300">
+            <nav class="flex flex-col gap-2 text-sm text-center">
+                <a href="#about" class="py-2 hover:bg-zinc-800 rounded-lg transition">About Me</a>
+                <a href="#services" class="py-2 hover:bg-zinc-800 rounded-lg transition">Services</a>
+                <a href="#projects" class="py-2 hover:bg-zinc-800 rounded-lg transition">Featured Projects</a>
+                <a href="#testimonials" class="py-2 hover:bg-zinc-800 rounded-lg transition">Testimonials</a>
+                <a href="#thoughts" class="py-2 hover:bg-zinc-800 rounded-lg transition">Thoughts</a>
+                <a href="#contact" class="py-2 bg-white text-black font-semibold rounded-lg hover:bg-zinc-200 transition">Let's Talk</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="w-full max-w-6xl mx-auto px-4 sm:px-8 pt-28 pb-16 space-y-32">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="relative flex flex-col items-center justify-center pt-8 text-center min-h-[85vh]">
+            <!-- Floating Decorative Icons -->
+            <div class="absolute top-4 left-6 sm:left-20 animate-bounce duration-1000 opacity-80 pointer-events-none">
+                <svg class="w-12 h-12 text-zinc-800 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"/>
+                </svg>
+            </div>
+            <div class="absolute bottom-20 right-6 sm:right-20 animate-pulse duration-700 opacity-80 pointer-events-none">
+                <svg class="w-10 h-10 text-zinc-800 fill-current" viewBox="0 0 24 24">
+                    <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
+                </svg>
+            </div>
+
+            <!-- Big Typography -->
+            <h1 class="hero-title text-6xl sm:text-8xl md:text-[110px] lg:text-[135px] text-zinc-900 uppercase tracking-tighter max-w-5xl my-auto">
+                Web Developer<br>Forex Trader
+            </h1>
+
+            <!-- Hero Portrait Overlay & Caption -->
+            <div class="mt-8 flex flex-col md:flex-row items-center justify-center gap-8 w-full max-w-4xl">
+                <div class="relative group photo-flight-source">
+                    <div class="photo-flight-placeholder w-48 h-56 sm:w-56 sm:h-64"></div>
+                    <div class="photo-flight-card w-48 h-56 sm:w-56 sm:h-64 rounded-3xl shadow-2xl border-4 border-white" aria-hidden="true">
+                        <img src="Rissss.jpeg" alt="" class="w-full h-full object-cover filter grayscale contrast-125">
+                    </div>
+                    <span class="mt-3 block text-[10px] uppercase tracking-widest text-zinc-500">Scroll to move the portrait</span>
+                </div>
+            </div>
+
+            <!-- Copyright Badge Footer of Hero -->
+            <div class="w-full flex justify-between items-end mt-12 text-xs sm:text-sm font-medium text-zinc-600">
+                <span>©2026</span>
+                <span class="tracking-widest uppercase">/ TRADING SINCE 2023</span>
+            </div>
+        </section>
+
+
+        <!-- ABOUT / HEY SECTION -->
+        <section id="about" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-12 border-t border-zinc-300/60">
+            <div class="lg:col-span-4 space-y-6">
+                <h2 class="text-5xl sm:text-6xl font-bold tracking-tight text-zinc-900">Hey!</h2>
+                <div class="p-6 bg-white rounded-2xl border border-zinc-300 shadow-sm space-y-2">
+                    <p class="text-sm font-semibold text-zinc-900">I'm Rishikesh, a builder based in India.</p>
+                    <p class="text-xs text-zinc-600 leading-relaxed">Specializing in Cybersecurity, AI Agent Automation (n8n), and Full-Stack Development. Currently engineering next-gen tools & security architecture.</p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 flex justify-center">
+                <div class="photo-flight-target w-full max-w-xs h-96 rounded-3xl overflow-hidden shadow-xl bg-red-900 border-4 border-white relative group">
+                    <img src="Rishikesh Profile.png" alt="Portrait" class="photo-flight-second w-full h-full object-cover filter contrast-125 hover:scale-105 transition duration-500">
+                    <img src="Rissss.jpeg" alt="Rishikesh Raj" class="photo-flight-arrival w-full h-full object-cover filter grayscale contrast-125">
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 space-y-6">
+                <p class="text-sm sm:text-base text-zinc-700 leading-relaxed font-normal">
+                    I'm a computer science engineer and security strategist focused on building modern, scalable, and attack-resilient digital experiences.
+                </p>
+                <p class="text-sm sm:text-base text-zinc-700 leading-relaxed font-normal">
+                    Over the years, I've developed AI-driven automation workflows, web applications, and security analysis tools used to accelerate modern software engineering.
+                </p>
+                <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-zinc-900 hover:gap-3 transition-all">
+                    Get Started <span>→</span>
+                </a>
+            </div>
+        </section>
+
+
+        <!-- PHILOSOPHY BANNER -->
+        <section class="text-center max-w-3xl mx-auto space-y-4 py-8">
+            <p class="text-xl sm:text-2xl md:text-3xl font-medium leading-relaxed text-zinc-800">
+                From idea to launch. Clean, scalable digital products built to move fast, stay simple, and perform in real-world use, driven by clarity, structured systems, and intentional design.
+            </p>
+        </section>
+
+
+        <!-- SERVICES SECTION -->
+        <section id="services" class="space-y-12">
+            <h2 class="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900">Services</h2>
+
+            <div class="divide-y divide-zinc-300 border-t border-b border-zinc-300">
+                <div class="py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl">
+                    <h3 class="text-xl sm:text-2xl font-bold text-zinc-900">Cybersecurity & Auditing</h3>
+                    <p class="text-xs sm:text-sm text-zinc-500 font-medium">URL Attack Detection • Smart Contract Auditing • Network Security</p>
+                </div>
+
+                <div class="py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl">
+                    <h3 class="text-xl sm:text-2xl font-bold text-zinc-900">AI Agent Workflows</h3>
+                    <p class="text-xs sm:text-sm text-zinc-500 font-medium">n8n Automation • LLM Integrations • Process Optimization</p>
+                </div>
+
+                <div class="py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl">
+                    <h3 class="text-xl sm:text-2xl font-bold text-zinc-900">Frontend Development</h3>
+                    <p class="text-xs sm:text-sm text-zinc-500 font-medium">UI Dev • Responsive Layouts • Web Performance • Tailwind</p>
+                </div>
+
+                <div class="py-6 sm:py-8 flex flex-col md:flex-row md:items-center justify-between gap-4 group hover:bg-white/50 px-4 transition rounded-xl">
+                    <h3 class="text-xl sm:text-2xl font-bold text-zinc-900">Product Consulting</h3>
+                    <p class="text-xs sm:text-sm text-zinc-500 font-medium">Product Direction • Web Strategy • Technical Architecture</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- FEATURED PROJECTS -->
+        <section id="projects" class="space-y-10">
+            <div class="flex items-center justify-between">
+                <h2 class="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900">Featured Projects</h2>
+                <a href="#contact" class="text-xs sm:text-sm font-semibold border border-zinc-400 px-4 py-2 rounded-full hover:bg-black hover:text-white transition">View All Work ↗</a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project Card 1 -->
+                <div class="space-y-4 group">
+                    <div class="h-64 sm:h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-teal-800 to-slate-900 relative p-6 flex flex-col justify-between shadow-md">
+                        <div class="bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-lg max-w-xs text-xs font-semibold text-zinc-800">
+                            Kyros-Studios Live Streaming System
+                        </div>
+                        <div class="text-white text-xl font-bold">BRINGING YOUR VISION TO LIFE.</div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-zinc-900">Kyros-Studios</h3>
+                        <p class="text-xs text-zinc-500 font-medium">Screen Mirroring & Broadcasting Engine</p>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="space-y-4 group">
+                    <div class="h-64 sm:h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-indigo-600 to-purple-900 relative p-6 flex flex-col justify-between shadow-md">
+                        <div class="bg-zinc-900 text-white p-4 rounded-xl shadow-lg max-w-xs text-xs">
+                            <span class="text-indigo-400 font-semibold block">Your AI-Powered Assistant</span>
+                            Automated n8n Search & Workflow Engine
+                        </div>
+                        <div class="text-white text-xl font-bold">Unleash Automation</div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-zinc-900">Googly AI Agent</h3>
+                        <p class="text-xs text-zinc-500 font-medium">n8n & Gemini Flash Integration</p>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="space-y-4 group">
+                    <div class="h-64 sm:h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-rose-500 to-pink-700 relative p-6 flex flex-col justify-between shadow-md">
+                        <div class="bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-lg max-w-xs text-xs font-bold text-zinc-900">
+                            AeroSec-Orbit SIH Security Prototype
+                        </div>
+                        <div class="text-white text-xl font-bold">HTTP URL Attack Detector</div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-zinc-900">AeroSec-Orbit</h3>
+                        <p class="text-xs text-zinc-500 font-medium">Cyber Attack Detection Architecture</p>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="space-y-4 group">
+                    <div class="h-64 sm:h-80 rounded-3xl overflow-hidden bg-gradient-to-br from-slate-200 to-slate-400 relative p-6 flex flex-col justify-between shadow-md">
+                        <div class="bg-white p-4 rounded-xl shadow-lg max-w-xs text-xs font-bold text-zinc-900">
+                            Microsoft Resources Directory
+                        </div>
+                        <div class="text-zinc-900 text-xl font-bold">Break Out The Square Space</div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-zinc-900">Dev Hub Directory</h3>
+                        <p class="text-xs text-zinc-500 font-medium">Curated Developer Portal</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TESTIMONIALS -->
+        <section id="testimonials" class="space-y-10">
+            <h2 class="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900">Testimonials</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Testimonial 1 -->
+                <div class="bg-zinc-900 text-white p-6 rounded-3xl flex flex-col justify-between space-y-6 shadow-xl">
+                    <p class="text-xs leading-relaxed text-zinc-300">"Rishikesh completely changed how we approach workflows and security audits. Everything feels intentional and rock solid."</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80" alt="Avatar" class="w-8 h-8 rounded-full">
+                        <div>
+                            <p class="text-xs font-bold">Yakoub K.</p>
+                            <p class="text-[10px] text-zinc-400">Tech Lead</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-zinc-900 text-white p-6 rounded-3xl flex flex-col justify-between space-y-6 shadow-xl">
+                    <p class="text-xs leading-relaxed text-zinc-300">"The n8n automation setups were fast, clean, and extremely easy to scale. Highly recommended!"</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&q=80" alt="Avatar" class="w-8 h-8 rounded-full">
+                        <div>
+                            <p class="text-xs font-bold">Daniel K.</p>
+                            <p class="text-[10px] text-zinc-400">Maker</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-zinc-900 text-white p-6 rounded-3xl flex flex-col justify-between space-y-6 shadow-xl">
+                    <p class="text-xs leading-relaxed text-zinc-300">"Saved us weeks of technical setup. We were able to launch our prototype smoothly with confidence."</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80" alt="Avatar" class="w-8 h-8 rounded-full">
+                        <div>
+                            <p class="text-xs font-bold">Mark M.</p>
+                            <p class="text-[10px] text-zinc-400">Startup Founder</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="bg-zinc-900 text-white p-6 rounded-3xl flex flex-col justify-between space-y-6 shadow-xl">
+                    <p class="text-xs leading-relaxed text-zinc-300">"The execution quality is insane. Clean architecture, robust logic, and smooth communication throughout."</p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=100&q=80" alt="Avatar" class="w-8 h-8 rounded-full">
+                        <div>
+                            <p class="text-xs font-bold">Omar H.</p>
+                            <p class="text-[10px] text-zinc-400">Frontend Engineer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- THOUGHTS / BLOG -->
+        <section id="thoughts" class="space-y-10">
+            <h2 class="text-4xl sm:text-5xl font-bold tracking-tight text-zinc-900">Thoughts</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Article 1 -->
+                <div class="bg-zinc-900 text-white p-6 rounded-3xl flex flex-col justify-between h-72 shadow-xl hover:scale-[1.02] transition">
+                    <span class="text-[10px] text-zinc-400">May 5, 2026</span>
+                    <div>
+                        <h3 class="text-lg font-bold leading-snug">Building Trust Through Security & Clear Code</h3>
+                        <p class="text-xs text-zinc-400 mt-2">How defensive programming creates a stronger foundation for products.</p>
+                    </div>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="bg-zinc-900 text-white p-6 rounded-3xl flex flex-col justify-between h-72 shadow-xl hover:scale-[1.02] transition">
+                    <span class="text-[10px] text-zinc-400">Jun 16, 2026</span>
+                    <div>
+                        <h3 class="text-lg font-bold leading-snug">The Role of AI Agents in Modern Systems</h3>
+                        <p class="text-xs text-zinc-400 mt-2">Why workflow automation with n8n and LLMs is revolutionizing development.</p>
+                    </div>
+                </div>
+
+                <!-- CTA Card -->
+                <div class="bg-zinc-900 text-white p-6 rounded-3xl flex flex-col justify-between h-72 shadow-xl">
+                    <p class="text-xl font-bold leading-tight">Explore how we shape modern digital systems with clarity and craft.</p>
+                    <a href="#contact" class="text-xs font-semibold underline underline-offset-4 hover:text-zinc-300">View All Work ↗</a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- LET'S TALK / CONTACT FORM -->
+        <section id="contact" class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pt-8 border-t border-zinc-300">
+            <div class="lg:col-span-5 space-y-6">
+                <h2 class="text-5xl sm:text-6xl font-bold tracking-tight text-zinc-900">Let's talk.</h2>
+                <p class="text-xs sm:text-sm text-zinc-600">Have a project or need assistance with software & security? Fill out the form, and I'll get back to you soon.</p>
+                
+                <!-- Social Links -->
+                <div class="flex gap-3 pt-4">
+                    <a href="https://x.com" target="_blank" rel="noreferrer" class="w-10 h-10 bg-zinc-200 hover:bg-black hover:text-white transition rounded-xl flex items-center justify-center font-bold text-sm">X</a>
+                    <a href="https://instagram.com" target="_blank" rel="noreferrer" class="w-10 h-10 bg-zinc-200 hover:bg-black hover:text-white transition rounded-xl flex items-center justify-center font-bold text-sm">IG</a>
+                    <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="w-10 h-10 bg-zinc-200 hover:bg-black hover:text-white transition rounded-xl flex items-center justify-center font-bold text-sm">IN</a>
+                    <a href="https://github.com" target="_blank" rel="noreferrer" class="w-10 h-10 bg-zinc-200 hover:bg-black hover:text-white transition rounded-xl flex items-center justify-center font-bold text-sm">GH</a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 bg-zinc-900 text-white p-6 sm:p-8 rounded-3xl shadow-2xl space-y-6">
+                <form id="portfolioContactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <div>
+                        <label for="userName" class="block text-xs font-semibold text-zinc-400 mb-1">Name</label>
+                        <input type="text" id="userName" required placeholder="Enter your name" class="w-full bg-zinc-800 border border-zinc-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-white transition">
+                    </div>
+                    <div>
+                        <label for="userEmail" class="block text-xs font-semibold text-zinc-400 mb-1">Email</label>
+                        <input type="email" id="userEmail" required placeholder="Enter your email" class="w-full bg-zinc-800 border border-zinc-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-white transition">
+                    </div>
+                    <div>
+                        <label for="userProject" class="block text-xs font-semibold text-zinc-400 mb-1">Your Project</label>
+                        <textarea id="userProject" rows="4" required placeholder="Tell me about your project" class="w-full bg-zinc-800 border border-zinc-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-white transition resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-white text-black font-semibold text-xs py-3 rounded-xl hover:bg-zinc-200 transition">Submit</button>
+                    <p id="formStatus" class="hidden text-xs text-emerald-400 text-center font-medium pt-2">Message sent successfully!</p>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- FULL FOOTER -->
+    <footer class="bg-black text-white w-full pt-16 pb-8 px-6 sm:px-12 mt-20 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto space-y-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <div>
+                    <h3 class="text-3xl sm:text-4xl font-bold tracking-tight leading-tight">Scaling<br>Start-ups<br>for Growth.</h3>
+                </div>
+
+                <div>
+                    <span class="text-xs text-zinc-500 font-semibold block mb-4">/Quick links</span>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <a href="#hero" class="bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg hover:bg-white hover:text-black transition">Home</a>
+                        <a href="#about" class="bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg hover:bg-white hover:text-black transition">About Me</a>
+                        <a href="#services" class="bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg hover:bg-white hover:text-black transition">Services</a>
+                        <a href="#projects" class="bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg hover:bg-white hover:text-black transition">Works</a>
+                        <a href="#contact" class="bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg hover:bg-white hover:text-black transition">Contact</a>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="text-xs text-zinc-500 font-semibold block mb-4">/Contact</span>
+                    <p class="text-xs text-zinc-300 font-medium">rishikesh@example.com</p>
+                </div>
+            </div>
+
+            <!-- Big Background Text Typography -->
+            <div class="text-center">
+                <h2 class="text-[18vw] sm:text-[16vw] font-extrabold tracking-tighter text-zinc-900 leading-none select-none pointer-events-none">
+                    RISHIKESH
+                </h2>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- INTERACTIVE JAVASCRIPT -->
+    <script>
+        // Toggle mobile popup navigation menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking links
+        document.querySelectorAll('#navMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.add('hidden');
+            });
+        });
+
+        // Move the first portrait through the page and into the second portrait's position.
+        const flightSource = document.querySelector('.photo-flight-source');
+        const flightSourcePlaceholder = document.querySelector('.photo-flight-placeholder');
+        const flightCard = document.querySelector('.photo-flight-card');
+        const flightTarget = document.querySelector('.photo-flight-target');
+        const secondPhoto = document.querySelector('.photo-flight-second');
+        const arrivalPhoto = document.querySelector('.photo-flight-arrival');
+        let flightFrame;
+
+        function updatePhotoFlight() {
+            const sourceBox = flightSourcePlaceholder.getBoundingClientRect();
+            const targetBox = flightTarget.getBoundingClientRect();
+            const sourceDocumentTop = sourceBox.top + window.scrollY;
+            const targetDocumentTop = targetBox.top + window.scrollY;
+            const travelDistance = Math.max(targetDocumentTop - sourceDocumentTop, 1);
+            const progress = Math.min(Math.max((window.scrollY - sourceDocumentTop + window.innerHeight * 0.2) / travelDistance, 0), 1);
+            const easedProgress = progress * progress * (3 - 2 * progress);
+            const left = sourceBox.left + (targetBox.left - sourceBox.left) * easedProgress;
+            const top = sourceBox.top + (targetBox.top - sourceBox.top) * easedProgress;
+            const scaleX = 1 + (targetBox.width / sourceBox.width - 1) * easedProgress;
+            const scaleY = 1 + (targetBox.height / sourceBox.height - 1) * easedProgress;
+            const flip = easedProgress * 720;
+            const airTilt = Math.sin(easedProgress * Math.PI) * 18;
+
+            flightCard.style.left = `${left}px`;
+            flightCard.style.top = `${top}px`;
+            flightCard.style.transform = `perspective(1200px) translate3d(0, 0, 0) rotateY(${flip}deg) rotateZ(${airTilt}deg) scale3d(${scaleX}, ${scaleY}, 1)`;
+            secondPhoto.style.opacity = progress >= 1 ? '0' : '1';
+            arrivalPhoto.style.opacity = progress >= 1 ? '1' : '0';
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!flightFrame) {
+                flightFrame = requestAnimationFrame(() => {
+                    updatePhotoFlight();
+                    flightFrame = null;
+                });
+            }
+        }, { passive: true });
+        window.addEventListener('resize', updatePhotoFlight);
+        updatePhotoFlight();
+
+        // Handle contact form simulation
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const status = document.getElementById('formStatus');
+            status.classList.remove('hidden');
+            setTimeout(() => {
+                status.classList.add('hidden');
+                document.getElementById('portfolioContactForm').reset();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
