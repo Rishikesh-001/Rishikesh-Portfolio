@@ -33,6 +33,10 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-black selection:text-white relative">
 
+    <canvas id="cursorEffects" aria-hidden="true"></canvas>
+    <span id="customCursor" aria-hidden="true"></span>
+    <span id="cursorLabel" aria-hidden="true"></span>
+
     <!-- TOP NAVIGATION PILL -->
     <header class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
         <div class="bg-black text-white px-6 py-2.5 rounded-full shadow-2xl flex items-center justify-between gap-12 border border-zinc-800">
@@ -396,6 +400,112 @@
 
     <!-- INTERACTIVE JAVASCRIPT -->
     <script>
+        // Layer a restrained black-and-grey cursor system over the portfolio.
+        const cursorCanvas = document.getElementById('cursorEffects');
+        const cursorContext = cursorCanvas.getContext('2d');
+        const cursorRipples = [];
+        const cursorFinePointer = window.matchMedia('(pointer: fine)').matches;
+        const cursorLabel = document.getElementById('cursorLabel');
+        const customCursor = document.getElementById('customCursor');
+        let cursorX = -100;
+        let cursorY = -100;
+        let renderedCursorX = cursorX;
+        let renderedCursorY = cursorY;
+
+        function resizeCursorCanvas() {
+            const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+            cursorCanvas.width = window.innerWidth * pixelRatio;
+            cursorCanvas.height = window.innerHeight * pixelRatio;
+            cursorCanvas.style.width = `${window.innerWidth}px`;
+            cursorCanvas.style.height = `${window.innerHeight}px`;
+            cursorContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        }
+
+        function drawCursorEffects() {
+            cursorContext.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            cursorContext.lineWidth = 1.5;
+            for (let index = cursorRipples.length - 1; index >= 0; index -= 1) {
+                const ripple = cursorRipples[index];
+                ripple.radius += 2.2;
+                ripple.alpha *= 0.94;
+                if (ripple.alpha < 0.02) {
+                    cursorRipples.splice(index, 1);
+                    continue;
+                }
+                cursorContext.strokeStyle = `rgba(${ripple.color}, ${ripple.alpha})`;
+                cursorContext.beginPath();
+                cursorContext.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
+                cursorContext.stroke();
+            }
+            requestAnimationFrame(drawCursorEffects);
+        }
+
+        function addCursorRipple(x, y) {
+            cursorRipples.push({ x, y, radius: 5, alpha: 0.5, color: Math.random() > 0.5 ? '10, 10, 10' : '105, 105, 105' });
+            if (cursorRipples.length > 14) cursorRipples.shift();
+        }
+
+        function animateCustomCursor() {
+            renderedCursorX += (cursorX - renderedCursorX) * 0.22;
+            renderedCursorY += (cursorY - renderedCursorY) * 0.22;
+            customCursor.style.transform = `translate3d(${renderedCursorX}px, ${renderedCursorY}px, 0)`;
+            requestAnimationFrame(animateCustomCursor);
+        }
+
+        if (cursorFinePointer) {
+            document.body.classList.add('custom-cursor-enabled');
+            resizeCursorCanvas();
+            window.addEventListener('resize', resizeCursorCanvas);
+            window.addEventListener('pointermove', (event) => {
+                cursorX = event.clientX;
+                cursorY = event.clientY;
+                cursorLabel.style.left = `${cursorX + 18}px`;
+                cursorLabel.style.top = `${cursorY + 18}px`;
+                const target = event.target.closest('[data-cursor-label]');
+                cursorLabel.textContent = target ? target.dataset.cursorLabel : '';
+                cursorLabel.classList.toggle('is-visible', Boolean(target));
+                customCursor.classList.toggle('is-hovering', Boolean(target));
+            }, { passive: true });
+            window.addEventListener('pointerleave', () => customCursor.classList.add('is-hidden'));
+            window.addEventListener('pointerenter', () => customCursor.classList.remove('is-hidden'));
+            window.addEventListener('pointerdown', (event) => addCursorRipple(event.clientX, event.clientY), { passive: true });
+            drawCursorEffects();
+            animateCustomCursor();
+        }
+
+        // Make project cards respond to the pointer without affecting touch devices.
+        document.querySelectorAll('#projects .group').forEach((card) => {
+            card.dataset.cursorLabel = 'View project';
+            card.classList.add('interactive-tilt');
+            card.addEventListener('pointermove', (event) => {
+                if (!cursorFinePointer) return;
+                const bounds = card.getBoundingClientRect();
+                const rotateX = ((event.clientY - bounds.top) / bounds.height - 0.5) * -7;
+                const rotateY = ((event.clientX - bounds.left) / bounds.width - 0.5) * 7;
+                card.style.setProperty('--tilt-x', `${rotateX}deg`);
+                card.style.setProperty('--tilt-y', `${rotateY}deg`);
+            });
+            card.addEventListener('pointerleave', () => {
+                card.style.setProperty('--tilt-x', '0deg');
+                card.style.setProperty('--tilt-y', '0deg');
+            });
+        });
+
+        document.querySelectorAll('#menuToggle, #projects a, #contact button, footer a').forEach((control) => {
+            control.dataset.cursorLabel = control.dataset.cursorLabel || 'Open';
+            control.classList.add('magnetic-control');
+            control.addEventListener('pointermove', (event) => {
+                if (!cursorFinePointer) return;
+                const bounds = control.getBoundingClientRect();
+                const pullX = (event.clientX - (bounds.left + bounds.width / 2)) * 0.18;
+                const pullY = (event.clientY - (bounds.top + bounds.height / 2)) * 0.18;
+                control.style.transform = `translate(${pullX}px, ${pullY}px)`;
+            });
+            control.addEventListener('pointerleave', () => {
+                control.style.transform = '';
+            });
+        });
+
         // Toggle mobile popup navigation menu
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.getElementById('navMenu');
