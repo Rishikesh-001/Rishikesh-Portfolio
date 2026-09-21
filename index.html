@@ -85,8 +85,9 @@
             <div class="mt-8 flex flex-col md:flex-row items-center justify-center gap-8 w-full max-w-4xl">
                 <div class="relative group photo-flight-source">
                     <div class="photo-flight-placeholder w-48 h-56 sm:w-56 sm:h-64"></div>
-                    <div class="photo-flight-card w-48 h-56 sm:w-56 sm:h-64 rounded-3xl shadow-2xl border-4 border-white" aria-hidden="true">
-                        <img src="Rissss.jpeg" alt="" class="w-full h-full object-cover filter grayscale contrast-125">
+                    <div class="photo-flight-card w-48 h-56 sm:w-56 sm:h-64 rounded-3xl shadow-2xl border-4 border-white" data-face="first" aria-hidden="true">
+                        <img src="Rissss.jpeg" alt="" class="photo-flight-face photo-flight-front w-full h-full object-cover filter grayscale contrast-125">
+                        <img src="Rishikesh Profile.png" alt="" class="photo-flight-face photo-flight-back w-full h-full object-cover filter contrast-125">
                     </div>
                     <span class="mt-3 block text-[10px] uppercase tracking-widest text-zinc-500">Scroll to move the portrait</span>
                 </div>
@@ -111,10 +112,7 @@
             </div>
 
             <div class="lg:col-span-4 flex justify-center">
-                <div class="photo-flight-target w-full max-w-xs h-96 rounded-3xl overflow-hidden shadow-xl bg-red-900 border-4 border-white relative group">
-                    <img src="Rishikesh Profile.png" alt="Portrait" class="photo-flight-second w-full h-full object-cover filter contrast-125 hover:scale-105 transition duration-500">
-                    <img src="Rissss.jpeg" alt="Rishikesh Raj" class="photo-flight-arrival w-full h-full object-cover filter grayscale contrast-125">
-                </div>
+                <div class="photo-flight-target w-full max-w-xs h-96 rounded-3xl overflow-hidden shadow-xl border-4 border-white relative group"></div>
             </div>
 
             <div class="lg:col-span-4 space-y-6">
@@ -418,8 +416,8 @@
         const flightSourcePlaceholder = document.querySelector('.photo-flight-placeholder');
         const flightCard = document.querySelector('.photo-flight-card');
         const flightTarget = document.querySelector('.photo-flight-target');
-        const secondPhoto = document.querySelector('.photo-flight-second');
-        const arrivalPhoto = document.querySelector('.photo-flight-arrival');
+        const firstPhoto = document.querySelector('.photo-flight-front');
+        const secondPhoto = document.querySelector('.photo-flight-back');
         let flightFrame;
 
         function updatePhotoFlight() {
@@ -430,18 +428,19 @@
             const travelDistance = Math.max(targetDocumentTop - sourceDocumentTop, 1);
             const progress = Math.min(Math.max((window.scrollY - sourceDocumentTop + window.innerHeight * 0.2) / travelDistance, 0), 1);
             const easedProgress = progress * progress * (3 - 2 * progress);
-            const left = sourceBox.left + (targetBox.left - sourceBox.left) * easedProgress;
-            const top = sourceBox.top + (targetBox.top - sourceBox.top) * easedProgress;
+            const left = sourceBox.left + sourceBox.width / 2 + (targetBox.left + targetBox.width / 2 - sourceBox.left - sourceBox.width / 2) * easedProgress;
+            const top = sourceBox.top + sourceBox.height / 2 + (targetBox.top + targetBox.height / 2 - sourceBox.top - sourceBox.height / 2) * easedProgress;
             const scaleX = 1 + (targetBox.width / sourceBox.width - 1) * easedProgress;
             const scaleY = 1 + (targetBox.height / sourceBox.height - 1) * easedProgress;
-            const flip = easedProgress * 720;
-            const airTilt = Math.sin(easedProgress * Math.PI) * 18;
+            const flip = easedProgress * 180;
 
             flightCard.style.left = `${left}px`;
             flightCard.style.top = `${top}px`;
-            flightCard.style.transform = `perspective(1200px) translate3d(0, 0, 0) rotateY(${flip}deg) rotateZ(${airTilt}deg) scale3d(${scaleX}, ${scaleY}, 1)`;
-            secondPhoto.style.opacity = progress >= 1 ? '0' : '1';
-            arrivalPhoto.style.opacity = progress >= 1 ? '1' : '0';
+            flightCard.style.transform = `translate3d(-50%, -50%, 0) perspective(1200px) rotateY(${flip}deg) scale3d(${scaleX}, ${scaleY}, 1)`;
+            const hasFlipped = progress > 0.5;
+            firstPhoto.style.opacity = hasFlipped ? '0' : '1';
+            secondPhoto.style.opacity = hasFlipped ? '1' : '0';
+            flightCard.dataset.face = hasFlipped ? 'second' : 'first';
         }
 
         window.addEventListener('scroll', () => {

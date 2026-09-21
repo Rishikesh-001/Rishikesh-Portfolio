@@ -34,7 +34,7 @@
             position: fixed;
             z-index: 40;
             transform-style: preserve-3d;
-            transform-origin: top left;
+            transform-origin: center center;
             overflow: hidden;
             pointer-events: none;
             will-change: left, top, transform;
@@ -43,16 +43,21 @@
         .photo-flight-card img {
             display: block;
         }
-        .photo-flight-target {
-            isolation: isolate;
-        }
-        .photo-flight-arrival {
+        .photo-flight-face {
             position: absolute;
             inset: 0;
-            opacity: 0;
-            transition: opacity 150ms ease;
+            backface-visibility: hidden;
+            transition: opacity 120ms ease;
         }
-        .photo-flight-second {
-            transition: opacity 150ms ease;
+        .photo-flight-back {
+            transform: rotateY(180deg);
+            opacity: 0;
+            backface-visibility: visible;
+        }
+        .photo-flight-target {
+            isolation: isolate;
+            background-color: #F4F3EF;
+            background-image: radial-gradient(#d1cfc7 0.75px, transparent 0.75px);
+            background-size: 24px 24px;
         }
   
