@@ -39,8 +39,10 @@
             <span class="loader-name">RISHIKESH</span>
             <img src="Portfolio Thunder image.avif" alt="" class="loader-thunder">
         </div>
-        <div class="loader-track"><span></span></div>
-        <p class="loader-status">Loading portfolio</p>
+        <div class="loader-track" aria-hidden="true">
+            <span id="loaderBar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></span>
+        </div>
+        <p id="loaderStatus" class="loader-status">Loading portfolio</p>
     </div>
 
     <canvas id="cursorEffects" aria-hidden="true"></canvas>
@@ -49,9 +51,9 @@
 
     <!-- TOP NAVIGATION PILL -->
     <header class="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-        <div class="bg-black text-white px-6 py-2.5 rounded-full shadow-2xl flex items-center justify-between gap-12 border border-zinc-800">
-            <a href="#hero" class="font-semibold text-sm tracking-wide hover:opacity-80 transition">Rishikesh</a>
-            <button id="menuToggle" aria-label="Toggle menu" aria-expanded="false" class="bg-zinc-800 hover:bg-zinc-700 text-white rounded-full p-1.5 transition flex items-center justify-center">
+        <div class="bg-black text-white px-7 py-3 rounded-full shadow-[0_18px_40px_rgba(0,0,0,0.22)] flex items-center justify-between gap-12 border border-zinc-700/80 backdrop-blur-sm ring-1 ring-white/5">
+            <a href="#hero" class="font-black text-[0.68rem] uppercase tracking-[0.22em] hover:opacity-90 transition-all">Rishikesh</a>
+            <button id="menuToggle" aria-label="Toggle menu" aria-expanded="false" class="w-9 h-9 bg-zinc-800 hover:bg-white hover:text-black text-white rounded-full p-1.5 transition-all duration-200 flex items-center justify-center border border-zinc-700 hover:border-white shadow-lg shadow-black/10">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <circle cx="5" cy="12" r="2" />
                     <circle cx="12" cy="12" r="2" />
@@ -61,20 +63,20 @@
         </div>
 
         <!-- POPUP MENU MODAL -->
-        <div id="navMenu" class="hidden absolute top-14 left-1/2 -translate-x-1/2 w-64 bg-black/95 text-white backdrop-blur-md rounded-2xl p-4 border border-zinc-800 shadow-2xl transition-all duration-300" aria-hidden="true">
-            <nav class="flex flex-col gap-2 text-sm text-center">
-                <a href="#about" class="nav-link py-2 hover:bg-zinc-800 rounded-lg transition">About Me</a>
-                <a href="#services" class="nav-link py-2 hover:bg-zinc-800 rounded-lg transition">Services</a>
-                <a href="#projects" class="nav-link py-2 hover:bg-zinc-800 rounded-lg transition">Featured Projects</a>
-                <a href="#testimonials" class="nav-link py-2 hover:bg-zinc-800 rounded-lg transition">Testimonials</a>
-                <a href="#thoughts" class="nav-link py-2 hover:bg-zinc-800 rounded-lg transition">Thoughts</a>
-                <a href="#contact" class="nav-link py-2 bg-white text-black font-semibold rounded-lg hover:bg-zinc-200 transition">Let's Talk</a>
+        <div id="navMenu" class="hidden absolute top-16 left-1/2 -translate-x-1/2 w-72 bg-black/95 text-white backdrop-blur-md rounded-3xl p-3 border border-zinc-800 shadow-[0_20px_60px_rgba(0,0,0,0.38)] transition-all duration-300" aria-hidden="true">
+            <nav class="flex flex-col gap-1.5 text-sm text-center">
+                <a href="#about" class="nav-link py-2.5 px-3 hover:bg-zinc-800 rounded-xl transition font-semibold tracking-[0.08em] uppercase text-[11px]">About Me</a>
+                <a href="#services" class="nav-link py-2.5 px-3 hover:bg-zinc-800 rounded-xl transition font-semibold tracking-[0.08em] uppercase text-[11px]">Services</a>
+                <a href="#projects" class="nav-link py-2.5 px-3 hover:bg-zinc-800 rounded-xl transition font-semibold tracking-[0.08em] uppercase text-[11px]">Featured Projects</a>
+                <a href="#testimonials" class="nav-link py-2.5 px-3 hover:bg-zinc-800 rounded-xl transition font-semibold tracking-[0.08em] uppercase text-[11px]">Testimonials</a>
+                <a href="#thoughts" class="nav-link py-2.5 px-3 hover:bg-zinc-800 rounded-xl transition font-semibold tracking-[0.08em] uppercase text-[11px]">Thoughts</a>
+                <a href="#contact" class="nav-link py-3 px-3 bg-white text-black font-black rounded-xl hover:bg-zinc-200 transition uppercase tracking-[0.12em] text-[10px] mt-1">Let's Talk</a>
             </nav>
         </div>
     </header>
 
     <!-- MAIN CONTENT CONTAINER -->
-    <main class="w-full max-w-6xl mx-auto px-4 sm:px-8 pt-28 pb-16 space-y-32">
+    <main class="w-full max-w-6xl mx-auto px-4 sm:px-8 pt-28 pb-16 space-y-32 relative z-10">
 
         <!-- HERO SECTION -->
         <section id="hero" class="relative flex flex-col items-center justify-center pt-8 text-center min-h-[85vh]">
@@ -106,7 +108,7 @@
             <!-- Copyright Badge Footer of Hero -->
             <div class="w-full flex justify-between items-end mt-12 text-xs sm:text-sm font-medium text-zinc-600">
                 <span>©2026</span>
-                <span class="tracking-widest uppercase">/ TRADING SINCE 2023</span>
+                <span class="tracking-widest uppercase">/ TRADING SINCE 2024</span>
             </div>
         </section>
 
@@ -413,15 +415,39 @@
     <script>
         // Fade the branded loading screen after the page and local assets are ready.
         const pageLoader = document.getElementById('pageLoader');
+        const loaderBar = document.getElementById('loaderBar');
+        const loaderStatus = document.getElementById('loaderStatus');
+
+        function animateLoader() {
+            let progress = 0;
+            const interval = window.setInterval(() => {
+                progress = Math.min(progress + Math.random() * 18 + 8, 100);
+                loaderBar.style.width = `${progress}%`;
+                loaderBar.setAttribute('aria-valuenow', String(Math.round(progress)));
+
+                if (progress >= 100) {
+                    window.clearInterval(interval);
+                    loaderStatus.textContent = 'Portfolio ready';
+                    loaderStatus.style.opacity = '0.9';
+                    window.setTimeout(() => {
+                        pageLoader.classList.add('is-loaded');
+                        window.setTimeout(() => pageLoader.remove(), 700);
+                    }, 280);
+                }
+            }, 150);
+        }
+
         window.addEventListener('load', () => {
-            pageLoader.classList.add('is-loaded');
-            window.setTimeout(() => pageLoader.remove(), 700);
+            window.setTimeout(animateLoader, 120);
         });
 
         // Layer a restrained black-and-grey cursor system over the portfolio.
         const cursorCanvas = document.getElementById('cursorEffects');
         const cursorContext = cursorCanvas.getContext('2d');
         const cursorRipples = [];
+        const particleField = [];
+        const heroSection = document.getElementById('hero');
+        const particleCount = 140;
         const cursorFinePointer = window.matchMedia('(pointer: fine)').matches;
         const cursorLabel = document.getElementById('cursorLabel');
         const customCursor = document.getElementById('customCursor');
@@ -429,6 +455,37 @@
         let cursorY = -100;
         let renderedCursorX = cursorX;
         let renderedCursorY = cursorY;
+
+        function getHeroBounds() {
+            return heroSection.getBoundingClientRect();
+        }
+
+        function createParticle() {
+            const bounds = getHeroBounds();
+            const landingBounds = {
+                left: 0,
+                right: window.innerWidth,
+                top: 0,
+                bottom: bounds.bottom,
+                width: window.innerWidth,
+                height: Math.max(bounds.bottom, 0),
+            };
+            return {
+                x: landingBounds.left + Math.random() * landingBounds.width,
+                y: Math.random() * landingBounds.height,
+                vx: (Math.random() - 0.5) * 1.2,
+                vy: (Math.random() - 0.5) * 1.2,
+                radius: Math.random() * 2.3 + 1.1,
+                alpha: Math.random() * 0.7 + 0.2,
+            };
+        }
+
+        function warmParticleField() {
+            particleField.length = 0;
+            for (let index = 0; index < particleCount; index += 1) {
+                particleField.push(createParticle());
+            }
+        }
 
         function resizeCursorCanvas() {
             const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -440,11 +497,53 @@
         }
 
         function drawCursorEffects() {
+            const bounds = getHeroBounds();
+            const landingBounds = {
+                left: 0,
+                right: window.innerWidth,
+                top: 0,
+                bottom: bounds.bottom,
+            };
+            const hasPointer = cursorX > -1 && cursorY > -1;
+            const inHero = hasPointer && cursorX >= landingBounds.left && cursorX <= landingBounds.right && cursorY >= landingBounds.top && cursorY <= landingBounds.bottom;
             cursorContext.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+            for (let index = 0; index < particleField.length; index += 1) {
+                const particle = particleField[index];
+
+                particle.x += particle.vx + Math.sin((particle.y + performance.now() * 0.01) * 0.06) * 0.18;
+                particle.y += particle.vy + Math.cos((particle.x + performance.now() * 0.01) * 0.06) * 0.18;
+
+                if (particle.x < landingBounds.left) particle.x = landingBounds.right;
+                if (particle.x > landingBounds.right) particle.x = landingBounds.left;
+                if (particle.y < landingBounds.top) particle.y = landingBounds.bottom;
+                if (particle.y > landingBounds.bottom) particle.y = landingBounds.top;
+
+                if (inHero) {
+                    const dx = particle.x - cursorX;
+                    const dy = particle.y - cursorY;
+                    const distance = Math.hypot(dx, dy) || 0.0001;
+
+                    if (distance < 180) {
+                        const force = (180 - distance) / 180;
+                        particle.vx += (dx / distance) * force * 1.6;
+                        particle.vy += (dy / distance) * force * 1.6;
+                    }
+                }
+
+                particle.vx *= 0.985;
+                particle.vy *= 0.985;
+
+                cursorContext.beginPath();
+                cursorContext.fillStyle = `rgba(17, 17, 17, ${particle.alpha})`;
+                cursorContext.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                cursorContext.fill();
+            }
+
             cursorContext.lineWidth = 1.5;
             for (let index = cursorRipples.length - 1; index >= 0; index -= 1) {
                 const ripple = cursorRipples[index];
-                ripple.radius += 2.2;
+                ripple.radius += 2.9;
                 ripple.alpha *= 0.94;
                 if (ripple.alpha < 0.02) {
                     cursorRipples.splice(index, 1);
@@ -473,12 +572,16 @@
         if (cursorFinePointer) {
             document.body.classList.add('custom-cursor-enabled');
             resizeCursorCanvas();
-            window.addEventListener('resize', resizeCursorCanvas);
+            warmParticleField();
+            window.addEventListener('resize', () => {
+                resizeCursorCanvas();
+                warmParticleField();
+            });
             window.addEventListener('pointermove', (event) => {
                 cursorX = event.clientX;
                 cursorY = event.clientY;
-                cursorLabel.style.left = `${cursorX + 18}px`;
-                cursorLabel.style.top = `${cursorY + 18}px`;
+                cursorLabel.style.left = `${event.clientX + 18}px`;
+                cursorLabel.style.top = `${event.clientY + 18}px`;
                 const target = event.target.closest('[data-cursor-label]');
                 cursorLabel.textContent = target ? target.dataset.cursorLabel : '';
                 cursorLabel.classList.toggle('is-visible', Boolean(target));
@@ -486,7 +589,11 @@
             }, { passive: true });
             window.addEventListener('pointerleave', () => customCursor.classList.add('is-hidden'));
             window.addEventListener('pointerenter', () => customCursor.classList.remove('is-hidden'));
-            window.addEventListener('pointerdown', (event) => addCursorRipple(event.clientX, event.clientY), { passive: true });
+            window.addEventListener('pointerdown', (event) => {
+                const bounds = getHeroBounds();
+                const insideHero = event.clientX >= bounds.left && event.clientX <= bounds.right && event.clientY >= bounds.top && event.clientY <= bounds.bottom;
+                if (insideHero) addCursorRipple(event.clientX, event.clientY);
+            }, { passive: true });
             drawCursorEffects();
             animateCustomCursor();
         }

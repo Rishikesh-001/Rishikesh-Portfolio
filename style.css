@@ -65,17 +65,30 @@
             animation: loader-pulse 0.9s ease-in-out infinite;
         }
         .loader-track {
-            width: min(260px, 60vw);
+            width: min(280px, 64vw);
             height: 2px;
             overflow: hidden;
-            background: #d1cfc7;
+            background: rgba(17, 17, 17, 0.14);
+            border-radius: 999px;
+            position: relative;
         }
         .loader-track span {
+            position: relative;
             display: block;
-            width: 45%;
+            width: 0;
             height: 100%;
-            background: #111111;
-            animation: loader-progress 1.15s ease-in-out infinite;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #111111 0%, #4b4b4b 100%);
+            box-shadow: 0 0 18px rgba(17, 17, 17, 0.2);
+            transition: width 220ms ease-out;
+        }
+        .loader-track span::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+            transform: translateX(-100%);
+            animation: loader-shine 1.5s ease-in-out infinite;
         }
         .loader-status {
             margin: 0;
@@ -84,6 +97,7 @@
             font-weight: 700;
             letter-spacing: 0.16em;
             text-transform: uppercase;
+            transition: opacity 200ms ease;
         }
         @keyframes loader-breathe {
             0%, 100% { opacity: 0.7; transform: scale(0.98); }
@@ -97,16 +111,17 @@
             0%, 100% { transform: scale(0.85); opacity: 0.6; }
             50% { transform: scale(1.1); opacity: 1; }
         }
-        @keyframes loader-progress {
-            0% { transform: translateX(-130%); }
-            100% { transform: translateX(290%); }
+        @keyframes loader-shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
         }
         #cursorEffects {
             position: fixed;
             inset: 0;
-            z-index: 60;
+            z-index: 0;
             pointer-events: none;
             mix-blend-mode: multiply;
+            opacity: 0.9;
         }
         #cursorLabel {
             position: fixed;
@@ -193,6 +208,10 @@
         #navMenu.nav-open .nav-link {
             animation: nav-link-in 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
         }
+        #navMenu .nav-link {
+            letter-spacing: 0.08em;
+            font-weight: 700;
+        }
         #navMenu.nav-open .nav-link:nth-child(1) { animation-delay: 30ms; }
         #navMenu.nav-open .nav-link:nth-child(2) { animation-delay: 55ms; }
         #navMenu.nav-open .nav-link:nth-child(3) { animation-delay: 80ms; }
@@ -203,6 +222,7 @@
             position: relative;
             transform: translateX(0);
             transition: transform 180ms ease, background-color 180ms ease, color 180ms ease;
+            font-weight: 700;
         }
         .nav-link::after {
             content: '';
